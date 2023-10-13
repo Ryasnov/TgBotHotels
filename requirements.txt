@@ -1,0 +1,6 @@
+pyTelegramBotAPI
+telebot
+python-dotenv~=1.0.0
+pydantic
+peewee~=3.16.3
+requests
