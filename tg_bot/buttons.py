@@ -1,40 +1,72 @@
-from telebot import types
+from telebot.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
 
 
 def all_buttons():
-    """Функия, возвращающая разметку клавиатуры со всеми командами"""
+    """Функия, возвращающая разметку клавиатуры со всеми командами
 
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    :return: разметка клавиатуры
+    """
+
+    markup = ReplyKeyboardMarkup(resize_keyboard=True)
     buttons = [
-        types.KeyboardButton(text='/start'),
-        types.KeyboardButton(text='/custom'),
-        types.KeyboardButton(text='/low'),
-        types.KeyboardButton(text='/high'),
-        types.KeyboardButton(text='/history'),
-        types.KeyboardButton(text='/help')
+        KeyboardButton(text='СТАРТ'),
+        KeyboardButton(text='НАСТРОЙКА'),
+        KeyboardButton(text='ДЕШЕВЫЕ'),
+        KeyboardButton(text='ДОРОГИЕ'),
+        KeyboardButton(text='ИСТОРИЯ'),
+        KeyboardButton(text='ПОМОЩЬ')
     ]
     markup.add(*buttons)
     return markup
 
 
-def start_button():
-    """Функия, возвращающая разметку клавиатуры с командой start"""
+def start_button() -> ReplyKeyboardMarkup:
+    """
+    Функия, возвращающая разметку клавиатуры с командой start
 
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    start = types.KeyboardButton(text='/start')
+    :return: разметка клавиатуры
+    """
+
+    markup = ReplyKeyboardMarkup(resize_keyboard=True)
+    start = KeyboardButton(text='СТАРТ')
     markup.add(start)
     return markup
 
 
-def necessary_buttons():
-    """Функия, возвращающая разметку клавиатуры с некоторыми командами"""
+def necessary_buttons() -> ReplyKeyboardMarkup:
+    """
+    Функия, возвращающая разметку клавиатуры с некоторыми командами
 
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    :return: разметка клавиатуры
+    """
+
+    markup = ReplyKeyboardMarkup(resize_keyboard=True)
     buttons = [
-        types.KeyboardButton(text='/start'),
-        types.KeyboardButton(text='/custom'),
-        types.KeyboardButton(text='/help'),
-        types.KeyboardButton(text='/history')
+        KeyboardButton(text='СТАРТ'),
+        KeyboardButton(text='НАСТРОЙКА'),
+        KeyboardButton(text='ПОМОЩЬ'),
+        KeyboardButton(text='ИСТОРИЯ')
     ]
+    markup.add(*buttons)
+    return markup
+
+
+def pagi_buttons(hotel_count: int, quantity: int) -> InlineKeyboardMarkup:
+    """
+    Функция, возвращающая разметку клавиатуры с командами для просмотра истории
+
+    :param hotel_count: порядковый номер отеля
+    :param quantity: общее количество отелей
+    :return: разметка клавиатуры
+    """
+
+    markup = InlineKeyboardMarkup()
+    left = hotel_count - 1 if hotel_count != 1 else quantity
+    right = hotel_count + 1 if hotel_count != quantity else 1
+    buttons = [
+        InlineKeyboardButton("назад", callback_data=f'to {left}'),
+        InlineKeyboardButton(f"{str(hotel_count)}/{str(quantity)}", callback_data='_'),
+        InlineKeyboardButton("вперёд", callback_data=f'to {right}')
+        ]
     markup.add(*buttons)
     return markup

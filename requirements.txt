@@ -1,6 +1,8 @@
-pyTelegramBotAPI
-telebot
-python-dotenv~=1.0.0
-pydantic
-peewee~=3.16.3
-requests
+pyTelegramBotAPI==4.14.0
+telebot==0.0.5
+python-dotenv==1.0.0
+pydantic==2.4.2
+peewee==3.16.3
+requests==2.31.0
+python-telegram-bot-calendar==1.0.5
+sqlite3_api==2.0.4
